@@ -1,8 +1,7 @@
 import pytest
+from python02.common import get_param
 
 from python02.Calculator import Calculator
-from python02.test_calc import get_param
-
 
 # fixture实现set up和tear down
 @pytest.fixture(scope='class')

@@ -2,14 +2,8 @@ from decimal import Decimal
 
 import allure
 import pytest
-import yaml
+
 import pytest_ordering
-
-
-def get_param():
-    with open("conf/param.yml") as f:
-        param = yaml.safe_load(f)
-    return param
 
 
 @allure.feature("计算器")
