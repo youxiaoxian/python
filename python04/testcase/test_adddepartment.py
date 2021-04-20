@@ -2,9 +2,9 @@ from python04.page.main_page import MainPage
 
 
 class TestAddDepartment:
-    main_page = MainPage()
 
     def setup(self):
+        self.main_page = MainPage()
         self.main_page.driver.maximize_window()
         self.main_page.driver.implicitly_wait(5)
 
