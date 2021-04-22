@@ -23,11 +23,12 @@ class Contact(Base):
         获取部门列表
         :return:
         '''
-        ele_list = self.driver.find_element(By.XPATH, '//*[@id="1688850737158532_anchor"]')
+        time.sleep(3)
+        ele_list = self.driver.find_elements(By.CSS_SELECTOR, '.jstree-anchor')
         print(ele_list)
-        name_list = []
+        department_list = []
         # 遍历元素列表，通过元素的text 属性，提取文本数据信息
-        # for ele in ele_list:
-        #     name_list.append(ele.text)
-        # print(name_list)
-        # return name_list
+        for ele in ele_list:
+            department_list.append(ele.text)
+        print(department_list)
+        return department_list

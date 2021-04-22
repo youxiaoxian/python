@@ -22,3 +22,9 @@ class Base:
             self.driver.implicitly_wait(3)
         else:
             self.driver = base_driver
+
+    def find(self, by, ele=None):
+        if ele is None:
+            return self.driver.find_element(*by)
+        else:
+            return self.driver.find_element(by, ele)

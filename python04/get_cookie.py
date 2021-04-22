@@ -11,7 +11,7 @@ def getcookie():
     options.debugger_address = '127.0.0.1:9222'
     driver = webdriver.Chrome(options=options)
     driver.get('https://work.weixin.qq.com/wework_admin/frame#index')
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(3)
     # 获取cookie信息
     cookie = driver.get_cookies()
     # 把cookie存如yaml文件内
