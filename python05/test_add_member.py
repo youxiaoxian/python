@@ -13,6 +13,7 @@ class TestAddmember:
         # 启动页
         caps["appActivity"] = ".launch.LaunchSplashActivity"
         caps["deviceName"] = "test"
+        # 等待页面空闲的时间
         caps["settings[waitForIdleTimeout]"] = 0
         caps["noReset"] = "true"
         # 客户端与服务端建立连接
