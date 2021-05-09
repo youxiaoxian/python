@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant 首页 as index
+participant 通讯录页面 as contactlist
+participant 添加成员页面 as addmember
+participant 手动添加成员页面 as addmemberbymanual
+
+participant 个人信息页面 as perinfo
+participant 个人信息更多页面 as perinfomore
+participant 编辑成员页面 as editmember
+
+index -> contactlist : 点击通讯录
+contactlist -> addmember : 点击添加成员
+addmember -> addmemberbymanual : 点击手动输入添加
+addmemberbymanual -> addmember : 点击保存
+addmember -> addmember : 验证添加成功toast
+
+contactlist -> perinfo : 点击要删除的联系人
+perinfo -> perinfomore : 点击页面右上角竖着的3个点
+perinfomore -> editmember : 点击编辑成员
+editmember -> contactlist : 点击删除成员，点击确定
+contactlist -> contactlist : 获取通讯录联系人列表
+
+@enduml
