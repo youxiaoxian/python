@@ -1,0 +1,31 @@
+{
+    "data":[
+        {
+            "config":{
+                "value":[
+                    {
+                        "sysAddr":"${trace}",
+                        "sysType":1,
+                        "name":"数据跟踪平台test",
+                        "comment":"数据流跟踪，包含网关数据、控制服务数据、应用数据"
+                    },
+                    {
+                        "sysAddr":"${statistics}",
+                        "sysType":1,
+                        "name":"统计服务系统",
+                        "comment":"数据统计分析"
+                    }
+                ]
+            },
+            "configName":"扩展功能配置",
+            "createBy":null,
+            "createTime":null,
+            "fileName":"index.js",
+            "id":4,
+            "updateBy":null,
+            "updateTime":"2021-03-31T08:48:02"
+        }
+    ],
+    "msg":"成功",
+    "result":"200"
+}
