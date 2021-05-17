@@ -52,8 +52,8 @@ addons = [
 if __name__ == '__main__':
     from mitmproxy.tools.main import mitmdump
     # 使用debug模式启动mitmdump
-    # mitmdump(['-p', '8080', '-s', __file__])
-    # mitmdump -p 8080 -s /Users/lixu/project/hogwarts/HogwartsSDET18/test_mock/mitm_s.py
+    # mitmdump(['-p', '8888', '-s', __file__])
+    # mitmdump -p 8888 -s /Users/youxian/Desktop/work02/python07_mock/recursion.py
     # 端口需要使用字符串
     mitmdump(['-p', '8888', "-s", __file__])
 
