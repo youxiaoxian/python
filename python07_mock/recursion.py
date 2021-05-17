@@ -18,7 +18,7 @@ class Events:
         """
         :param base_data: 原始的数据
         :param int_data: 倍增的倍数
-        :return: 在原始数据基础之上，修改float 类型，对float 类型做数据翻倍操作
+        :return: 在原始数据基础之上，对int类型数据做翻倍操作
         """
         #
         if isinstance(base_data, dict):
@@ -39,7 +39,7 @@ class Events:
                 self.recursion(i, int_data)
             # [self.recursion(i, int_data) for i in base_data]
         elif isinstance(base_data, int):
-            # 对浮点型做倍增
+            # 对int型数据做倍增
             base_data = base_data * int_data
         else:
             base_data = base_data
