@@ -20,7 +20,7 @@ class Tag(WeWork):
             "json": {}
         }
         r = self.http_request(data)
-        # self.save(data, r)
+        self.save(data, r)
         return r
 
     @allure.step("增加标签")
@@ -134,8 +134,3 @@ class Tag(WeWork):
         # jsonpath返回结果为列表，[0]取出列表中的字符串
         # print(jsonpath(r, f"$..tag[?(@.name=='NAME1')].id")[0])
 
-    @allure.step("请求数据和响应结果")
-    def save(self, data, r):
-        allure.attach(f"{json.dumps(data, indent=2, ensure_ascii=False)}", "请求的数据", attachment_type=allure.attachment_type.TEXT)
-        allure.attach(f"{json.dumps(r.json(), indent=2, ensure_ascii=False)}", "响应的数据",
-                      attachment_type=allure.attachment_type.TEXT)

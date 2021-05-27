@@ -1,0 +1,12 @@
+{
+  "userid": "{{userid}}",
+  "name": "{{name}}",
+  "alias": "jackzhang",
+  "mobile": "{{mobile}}",
+  "department": "{{department}}",
+  "position": "产品经理",
+  "gender": "1",
+  "email": "zhangsan@gzdev.com",
+  "enable": 1,
+  "telephone": "020-123456",
+}

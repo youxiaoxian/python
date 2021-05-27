@@ -8,7 +8,8 @@ from test_wework_api.api.externalcontact.tag import Tag
 class TestTag:
     def setup_class(self):
         self.tag = Tag()
-        self.tag.get_token()
+        corpsecret = "XzWffUR_06xA1rktB3uCGkToykg88RrJCySCJAY39D0"
+        self.tag.get_token(corpsecret)
         # 清除所有tag
         self.tag.clear()
 
@@ -20,9 +21,12 @@ class TestTag:
     @allure.story("获取企业标签库")
     @allure.title("成功获取企业标签库")
     def test_get_tag(self):
-        r = self.tag.get_tag()
-        assert r.json()['errcode'] == 0
-        assert len(r.json()['tag_group']) == 0
+        with allure.step("第一步：调用获取标签方法"):
+            r = self.tag.get_tag()
+        with allure.step("第二步：断言获取标签方法errcode为0"):
+            assert r.json()['errcode'] == 0
+        with allure.step("第三步：断言标签组的list长度为0，因为在setup_class清理了所有标签"):
+            assert len(r.json()['tag_group']) == 0
 
     @pytest.mark.run(order=2)
     @allure.story("添加企业客户标签")
@@ -42,10 +46,10 @@ class TestTag:
             assert 'test0521001_group1' in [group['group_name'] for group in r.json()['tag_group']]
         tag_name_list = ["test111", "test112"]
         # 判断集合相等
-        with allure.step("第六步：断言新增的tag列表是否在获取标签的响应结果中"):
+        with allure.step("第六步：断言新增的tag列表的集合与获取标签方法响应结果的tag列表集合一致"):
             assert set(tag_name_list) == set(jsonpath(r.json(), '$..tag[*].name'))
         # 判断set(tag_list)是set(jsonpath(r.json(), '$..tag[*].name'))的子集
-        with allure.step("同第六步：断言新增的tag列表是否在获取标签的响应结果中"):
+        with allure.step("同第六步：断言新增的tag列表集合是获取标签方法响应结果的tag列表集合的子集"):
             assert set(tag_name_list).issubset(set(jsonpath(r.json(), '$..tag[*].name')))
 
     @pytest.mark.run(order=3)
@@ -53,12 +57,16 @@ class TestTag:
     @allure.title("成功编辑企业客户标签")
     @pytest.mark.parametrize('tag_name_old,tag_name_new', [["test111", "test"]])
     def test_edit_tag(self, tag_name_old, tag_name_new):
-        tag_id = self.tag.get_tag_id(tag_name_old)
-        r = self.tag.edit_tag(tag_id, tag_name_new)
-        assert r.json()['errcode'] == 0
-
-        r = self.tag.get_tag()
-        assert tag_name_new in jsonpath(r.json(), '$..name')
+        with allure.step("第一步：调用根据tag_name获取tag_id方法"):
+            tag_id = self.tag.get_tag_id(tag_name_old)
+        with allure.step("第二步：调用编辑标签方法"):
+            r = self.tag.edit_tag(tag_id, tag_name_new)
+        with allure.step("第三步：断言编辑标签方法errcode为0"):
+            assert r.json()['errcode'] == 0
+        with allure.step("第四步：调用获取标签方法"):
+            r = self.tag.get_tag()
+        with allure.step("第五步：断言修改的标签名称在获取标签方法响应结果中"):
+            assert tag_name_new in jsonpath(r.json(), '$..name')
 
     # @pytest.mark.run(order=4)
     # @pytest.mark.parametrize('tag_name_list', [["test","test112"]])
@@ -80,14 +88,19 @@ class TestTag:
     @allure.title("成功删除企业标签库")
     @pytest.mark.parametrize('tag_name_list', [["test", "test112"]])
     def test_delete_tag(self, tag_name_list):
-        tag_id_list = self.tag.get_tag_id_list_2(tag_name_list)
-        r = self.tag.delete_tag(tag_id_list)
-        assert r.json()['errcode'] == 0
-        r = self.tag.get_tag()
-        for tag_id in tag_id_list:
-            # 判断删除的内容是否已经消失在search结果里
-            # $..*所有元素
-            assert tag_id not in jsonpath(r.json(), '$..*')
+        with allure.step("第一步：调用根据tag_name_list获取tag_id_list，通过jsonpath方法"):
+            tag_id_list = self.tag.get_tag_id_list_2(tag_name_list)
+        with allure.step("第二步：调用删除标签方法"):
+            r = self.tag.delete_tag(tag_id_list)
+        with allure.step("第三步：断言删除标签方法errcode为0"):
+            assert r.json()['errcode'] == 0
+        with allure.step("第四步：调用获取标签方法"):
+            r = self.tag.get_tag()
+        with allure.step("第五步：断言删除的tag_id不在获取标签方法响应结果中"):
+            for tag_id in tag_id_list:
+                # 判断删除的内容是否已经消失在获取标签结果中
+                # $..*所有元素
+                assert tag_id not in jsonpath(r.json(), '$..*')
 
     @allure.story("全流程测试")
     @allure.title("成功全流程测试")
